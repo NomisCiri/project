@@ -52,4 +52,14 @@ inflation %>%
   scale_y_continuous(name="inflation value")+
   theme_bw(14)
 ```
+# Does education matter?
+```{r}
+inflation %>% 
+  pivot_longer(c(expectation, perception)) %>% 
+  ungroup()%>%
+  lm(formula=value~name+sex+education,data=.)%>%
+  sjPlot::plot_model()+
+  theme_bw()+
+  geom_vline(aes(xintercept = 0),color="black")
 
+```
