@@ -42,7 +42,7 @@ For this dataset the Bank of England asked `r prettyNum(nrow(inflation), big.mar
 The survey has run quarterly since `r min(inflation$year)`.
 
 
-```{r}
+```{r include=FALSE}
 inflation %>% 
   pivot_longer(c(expectation, perception)) %>% 
   ungroup() %>% 
