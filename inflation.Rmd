@@ -58,8 +58,7 @@ inflation %>%
   pivot_longer(c(expectation, perception)) %>% 
   ungroup()%>%
   lm(formula=value~name+sex+education,data=.)%>%
-  sjPlot::plot_model()+
-  theme_bw()+
-  geom_vline(aes(xintercept = 0),color="black")
+  sjPlot::plot_model()
+  #geom_vline(aes(xintercept = 0),color="black")
 
 ```
