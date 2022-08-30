@@ -1,6 +1,6 @@
 ---
 title: "Inflation Data"
-author: "Aaron Peikert"
+author: "Simon Ciranka"
 date: "`r Sys.Date()`"
 output:
   html_document: default
