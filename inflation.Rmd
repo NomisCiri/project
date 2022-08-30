@@ -20,15 +20,6 @@ repro::automate_load_packages()
 repro::automate_load_scripts()
 knitr::opts_chunk$set(echo = FALSE)
 
-# use a function without loading the package
-# package::function
-usethis::use_git_config(
-  user.name = "Simon",
-  user.email = "Simon@ciranka.de",
-  init.defaultBranch = "main")
-
-
-usethis::use_git()
 ```
 
 The dataset we use stems from the [Bank of England Research datasets](https://www.bankofengland.co.uk/statistics/research-datasets).
@@ -53,21 +44,12 @@ The survey has run quarterly since `r min(inflation$year)`.
 
 ```{r}
 inflation %>% 
-  group_by(date) %>% 
-  summarise(across(c(perception, expectation),
-                   ~ mean(., na.rm = TRUE)),
-            .groups = "drop") %>% 
   pivot_longer(c(expectation, perception)) %>% 
   ungroup() %>% 
-  ggplot() +
-  geom_line(aes(date, value, color = name)) +
-  NULL
+  ggplot(aes(x=date,y=value,color=name)) +
+  stat_smooth()+
+  facet_wrap(~education)+
+  scale_y_continuous(name="inflation value")+
+  theme_bw(14)
 ```
 
-```{r}
-inflation %>% 
-  group_by(date) %>% 
-  summarise(across(c(perception, expectation),
-                   ~ mean(., na.rm = TRUE)),
-            .groups = "drop")
-```
